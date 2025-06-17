@@ -11,3 +11,9 @@ wheels/
 
 # Environment variables
 .env
+
+# Python packages files
+*__init__.py
+
+# Additional files
+error_handling/
