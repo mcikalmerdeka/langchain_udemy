@@ -15,5 +15,8 @@ wheels/
 # Python packages files
 *__init__.py
 
+# IDE/Editor files
+.vscode/
+
 # Additional files
 error_handling/
