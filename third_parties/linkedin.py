@@ -18,7 +18,7 @@ def scrape_linkedin_profile(linkedin_profile_url: str, mock: bool = False):
         
         response = requests.get(
             url=linkedin_profile_url,
-            timeout=10
+            timeout=30
         )
     else:
         api_endpoint = "https://api.scrapin.io/enrichment/profile"
@@ -30,7 +30,7 @@ def scrape_linkedin_profile(linkedin_profile_url: str, mock: bool = False):
         response = requests.get(
             url=api_endpoint,
             params=params,
-            timeout=10
+            timeout=30
         )
     
     # Get the data from the response
