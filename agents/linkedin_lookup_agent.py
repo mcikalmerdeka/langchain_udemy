@@ -1,10 +1,4 @@
 import os
-
-# # Only use this if you are running the script directly
-# # This is to ensure that the script can find the tools.py file
-# import sys
-# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from dotenv import load_dotenv
 from langchain.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
@@ -57,7 +51,7 @@ def lookup(name: str) -> str:
 
     # Create an agent executor from the agent
     # Note: The agent executor is going to be responsible for orchestrating all of the components
-    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True)
+    agent_executor = AgentExecutor(agent=agent, tools=tools, verbose=True, handle_parsing_errors=True)
 
     # Run the agent executor
     result = agent_executor.invoke(
@@ -68,5 +62,10 @@ def lookup(name: str) -> str:
     return linkedin_profile_url
 
 if __name__ == "__main__":
+    # Only use this if you are running the script directly
+    # This is to ensure that the script can find the tools.py file
+    import sys
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+
     linkedin_profile_url = lookup("Cikal Merdeka Bandung Jawa Barat")
     print(linkedin_profile_url)

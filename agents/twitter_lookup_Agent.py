@@ -1,10 +1,4 @@
 import os
-
-# # Only use this if you are running the script directly
-# # This is to ensure that the script can find the tools.py file
-# import sys
-# sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
-
 from dotenv import load_dotenv
 from langchain.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
@@ -69,5 +63,10 @@ def lookup(name: str) -> str:
     return linkedin_profile_url
 
 if __name__ == "__main__":
+    # Only use this if you are running the script directly
+    # This is to ensure that the script can find the tools.py file
+    import sys
+    sys.path.append(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
+    
     twitter_profile_url = lookup("Eden Marco Udemy")
     print(twitter_profile_url)
