@@ -633,6 +633,7 @@ dependencies = [
     { name = "langchain-tavily" },
     { name = "python-dotenv" },
     { name = "requests" },
+    { name = "tweepy" },
 ]
 
 [package.metadata]
@@ -645,6 +646,7 @@ requires-dist = [
     { name = "langchain-tavily", specifier = ">=0.2.3" },
     { name = "python-dotenv", specifier = ">=1.0.0" },
     { name = "requests", specifier = ">=2.31.0" },
+    { name = "tweepy", specifier = ">=4.15.0" },
 ]
 
 [[package]]
@@ -897,6 +899,15 @@ wheels = [
     { url = "https://files.pythonhosted.org/packages/9d/a3/1e536797fd10eb3c5dbd2e376671667c9af19e241843548575267242ea02/numpy-2.3.0-pp311-pypy311_pp73-manylinux_2_28_aarch64.whl", hash = "sha256:33a5a12a45bb82d9997e2c0b12adae97507ad7c347546190a18ff14c28bbca12", size = 14398078, upload-time = "2025-06-07T14:52:00.122Z" },
     { url = "https://files.pythonhosted.org/packages/7c/61/9d574b10d9368ecb1a0c923952aa593510a20df4940aa615b3a71337c8db/numpy-2.3.0-pp311-pypy311_pp73-manylinux_2_28_x86_64.whl", hash = "sha256:54dfc8681c1906d239e95ab1508d0a533c4a9505e52ee2d71a5472b04437ef97", size = 16751324, upload-time = "2025-06-07T14:52:25.077Z" },
     { url = "https://files.pythonhosted.org/packages/39/de/bcad52ce972dc26232629ca3a99721fd4b22c1d2bda84d5db6541913ef9c/numpy-2.3.0-pp311-pypy311_pp73-win_amd64.whl", hash = "sha256:e017a8a251ff4d18d71f139e28bdc7c31edba7a507f72b1414ed902cbe48c74d", size = 12924237, upload-time = "2025-06-07T14:52:44.713Z" },
+]
+
+[[package]]
+name = "oauthlib"
+version = "3.3.0"
+source = { registry = "https://pypi.org/simple" }
+sdist = { url = "https://files.pythonhosted.org/packages/98/8a/6ea75ff7acf89f43afb157604429af4661a9840b1f2cece602b6a13c1893/oauthlib-3.3.0.tar.gz", hash = "sha256:4e707cf88d7dfc22a8cce22ca736a2eef9967c1dd3845efc0703fc922353eeb2", size = 190292, upload-time = "2025-06-17T23:19:18.309Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/e1/3d/760b1456010ed11ce87c0109007f0166078dfdada7597f0091ae76eb7305/oauthlib-3.3.0-py3-none-any.whl", hash = "sha256:a2b3a0a2a4ec2feb4b9110f56674a39b2cc2f23e14713f4ed20441dfba14e934", size = 165155, upload-time = "2025-06-17T23:19:16.771Z" },
 ]
 
 [[package]]
@@ -1278,6 +1289,19 @@ wheels = [
 ]
 
 [[package]]
+name = "requests-oauthlib"
+version = "2.0.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "oauthlib" },
+    { name = "requests" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/42/f2/05f29bc3913aea15eb670be136045bf5c5bbf4b99ecb839da9b422bb2c85/requests-oauthlib-2.0.0.tar.gz", hash = "sha256:b3dffaebd884d8cd778494369603a9e7b58d29111bf6b41bdc2dcd87203af4e9", size = 55650, upload-time = "2024-03-22T20:32:29.939Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/3b/5d/63d4ae3b9daea098d5d6f5da83984853c1bbacd5dc826764b249fe119d24/requests_oauthlib-2.0.0-py2.py3-none-any.whl", hash = "sha256:7dd8a5c40426b779b0868c404bdef9768deccf22749cde15852df527e6269b36", size = 24179, upload-time = "2024-03-22T20:32:28.055Z" },
+]
+
+[[package]]
 name = "requests-toolbelt"
 version = "1.0.0"
 source = { registry = "https://pypi.org/simple" }
@@ -1393,6 +1417,20 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/a8/4b/29b4ef32e036bb34e4ab51796dd745cdba7ed47ad142a9f4a1eb8e0c744d/tqdm-4.67.1.tar.gz", hash = "sha256:f8aef9c52c08c13a65f30ea34f4e5aac3fd1a34959879d7e59e63027286627f2", size = 169737, upload-time = "2024-11-24T20:12:22.481Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/d0/30/dc54f88dd4a2b5dc8a0279bdd7270e735851848b762aeb1c1184ed1f6b14/tqdm-4.67.1-py3-none-any.whl", hash = "sha256:26445eca388f82e72884e0d580d5464cd801a3ea01e63e5601bdff9ba6a48de2", size = 78540, upload-time = "2024-11-24T20:12:19.698Z" },
+]
+
+[[package]]
+name = "tweepy"
+version = "4.15.0"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "oauthlib" },
+    { name = "requests" },
+    { name = "requests-oauthlib" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/99/05/7c2c01bd62900eff24534779f1e1531491dfd872edb6a9d432ae91e18b4b/tweepy-4.15.0.tar.gz", hash = "sha256:1345cbcdf0a75e2d89f424c559fd49fda4d8cd7be25cd5131e3b57bad8a21d76", size = 100268, upload-time = "2025-01-15T21:25:05.307Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/81/53/ca632ec02085b5c432e98ae1f872a21f2b6bb6c3d022dcf586809cc65cd0/tweepy-4.15.0-py3-none-any.whl", hash = "sha256:64adcea317158937059e4e2897b3ceb750b0c2dd5df58938c2da8f7eb3b88e6a", size = 99379, upload-time = "2025-01-15T21:25:02.856Z" },
 ]
 
 [[package]]

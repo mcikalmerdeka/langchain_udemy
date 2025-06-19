@@ -13,4 +13,5 @@ dependencies = [
     "python-dotenv>=1.0.0",
     "langchain-tavily>=0.2.3",
     "langchain-community>=0.3.25",
+    "tweepy>=4.15.0",
 ]
