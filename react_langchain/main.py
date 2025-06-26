@@ -11,6 +11,7 @@ from langchain_core.tools import render_text_description
 from langchain_openai import ChatOpenAI
 from langchain_core.tools import Tool
 from langchain.agents.format_scratchpad import format_log_to_str
+from callbacks import AgentCallbackHandler
     
 # ReActSingleInputOutputParser: Parses LLM output that follows the ReAct (Reasoning and Acting) pattern
 # It converts raw text responses into structured AgentAction or AgentFinish objects
@@ -74,10 +75,14 @@ if __name__ == "__main__":
         tools=render_text_description(tools), tool_names=", ".join([t.name for t in tools])
     )
 
+    # Initialize the callbacks
+    callbacks = [AgentCallbackHandler()]
+
     # Initialize the LLM
     llm = ChatOpenAI(model="gpt-4.1", temperature=0, 
                      api_key=os.getenv("OPENAI_API_KEY"),
-                     stop=["\nObservation:"]) # Stop the LLM when it sees the word "Observation:"
+                     stop=["\nObservation:"], # Stop the LLM when it sees the word "Observation:"
+                     callbacks=callbacks)
 
     intermediate_steps = []
     
@@ -99,45 +104,44 @@ if __name__ == "__main__":
         | llm 
         | ReActSingleInputOutputParser()
     )
-    
-    # Invoke the agent with a test question
-    # Pass "intermediate_steps" since that's what the lambda function expects
-    agent_step: Union[AgentAction, AgentFinish] = agent.invoke(
-        {
-            "input": "What is the length of the word 'Jokowi' in characters?",
-            "intermediate_steps": intermediate_steps
-        }
-    )
-    print(f"Agent step: {agent_step}")
 
-    # Check if the agent decided to take an action (use a tool)
-    # This works because ReActSingleInputOutputParser converted the raw LLM text into a structured AgentAction object when it detected the Action/Action Input pattern
-    if isinstance(agent_step, AgentAction):
-        
-        # Extract the tool name the agent wants to use (parsed from "Action: tool_name")
-        tool_name = agent_step.tool
-        # Find the actual tool function from our tools list
-        tool_to_use = find_tool_by_name(tools, tool_name)
-        # Get the input the agent wants to pass to the tool (parsed from "Action Input: input")
-        tool_input = agent_step.tool_input
+    agent_step = None
 
-        # Execute the tool with the agent's input and get the result
-        observation = tool_to_use.invoke(tool_input)
-        print(f"Observation: {observation=}")
-        
-        # Add the tool call and its result to the intermediate steps
-        intermediate_steps.append((agent_step, str(observation)))
+    # Create a loop to invoke the agent until it returns an AgentFinish
+    iteration = 1
+    while agent_step is None or not isinstance(agent_step, AgentFinish):
+        print(f"\n=== ITERATION {iteration} ===")
+        iteration += 1
 
-    # Re-invoke the agent with the intermediate steps (history of the agent's actions and observations)
-    agent_step: Union[AgentAction, AgentFinish] = agent.invoke(
-        {
-            "input": "What is the length of the word 'Jokowi' in characters?",
-            "intermediate_steps": intermediate_steps
-        }
-    )
+        # Invoke the agent with a test question
+        # Pass "intermediate_steps" since that's what the lambda function expects
+        agent_step: Union[AgentAction, AgentFinish] = agent.invoke(
+            {
+                "input": "What is the length of the word 'Jokowi' in characters?",
+                "intermediate_steps": intermediate_steps
+            }
+        )
+
+        # Check if the agent decided to take an action (use a tool)
+        # This works because ReActSingleInputOutputParser converted the raw LLM text into a structured AgentAction object when it detected the Action/Action Input pattern
+        if isinstance(agent_step, AgentAction):
+            
+            # Extract the tool name the agent wants to use (parsed from "Action: tool_name")
+            tool_name = agent_step.tool
+            
+            # Find the actual tool function from our tools list
+            tool_to_use = find_tool_by_name(tools, tool_name)
+            
+            # Get the input the agent wants to pass to the tool (parsed from "Action Input: input")
+            tool_input = agent_step.tool_input
+
+            # Execute the tool with the agent's input and get the result
+            observation = tool_to_use.invoke(tool_input)
+            print(f"Observation: {observation=}")
+            
+            # Add the tool call and its result to the intermediate steps
+            intermediate_steps.append((agent_step, str(observation)))
 
     # Final check if we returned an AgentFinish output
     if isinstance(agent_step, AgentFinish):
         print(f"Final Agent step (This will now output as AgentFinish): {agent_step.return_values['output']}")
-    else:
-        print(f"Final Agent step (This will now output as AgentAction): {agent_step}")
