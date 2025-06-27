@@ -17,4 +17,7 @@ dependencies = [
     "flask>=3.1.1",
     "langsmith>=0.1.0",
     "ipykernel>=6.29.5",
+    "langchain-pinecone>=0.2.8",
+    "langchain-text-splitters>=0.3.8",
+    "youtube-transcript-api>=1.1.0",
 ]
