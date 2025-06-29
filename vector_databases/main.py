@@ -55,7 +55,7 @@ if __name__ == "__main__":
 
     # Create the chain (with Retrieval Vector Database)
     rag_chain = (
-        {"context": vectorstore.as_retriever() | format_docs, "question": RunnablePassthrough()} 
+        {"context": vectorstore.as_retriever() | format_docs, "question": RunnablePassthrough()} # Values that will be passed to the prompt template
         | custom_rag_prompt
         | llm
     )
