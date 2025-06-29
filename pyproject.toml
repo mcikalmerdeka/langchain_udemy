@@ -20,4 +20,6 @@ dependencies = [
     "langchain-pinecone>=0.2.8",
     "langchain-text-splitters>=0.3.8",
     "youtube-transcript-api>=1.1.0",
+    "pypdf>=5.7.0",
+    "faiss-cpu>=1.11.0",
 ]
