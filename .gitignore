@@ -19,5 +19,7 @@ wheels/
 .vscode/
 
 # Additional files
+faiss_index_react/
 error_handling/
 debug/
+rag_chain_explanation.txt
