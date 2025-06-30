@@ -2,6 +2,7 @@ import os
 from dotenv import load_dotenv
 from langgraph.graph import MessagesState, StateGraph, START, END
 from nodes import run_agent_reasoning, tool_node
+from langchain_core.messages import HumanMessage
 
 load_dotenv("../.env")
 
@@ -42,3 +43,10 @@ app.get_graph().draw_mermaid_png(output_file_path="langgraph_react/react_graph.p
 
 if __name__ == "__main__":
     print(f"Hello ReAct LangGraph! with Function Calling!")
+
+    result = app.invoke({"messages": [HumanMessage(content="What is the weather in Tokyo? List it and then triple it")]})
+    print(result["messages"][LAST].content)
+
+    # # Optional : Save the result to a file
+    # with open("langgraph_react/result.txt", "w") as f:
+    #     f.write(result["messages"][LAST].content)
