@@ -22,4 +22,6 @@ wheels/
 faiss_index_react/
 error_handling/
 debug/
+langchain-docs-newest/
+langchain-docs-0.2.6/
 rag_chain_explanation.txt
