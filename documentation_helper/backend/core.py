@@ -29,7 +29,16 @@ def run_llm(query: str):
     
     stuff_document_chain = create_stuff_documents_chain(llm, prompt)
     retrieval_chain = create_retrieval_chain(retriever=retriever, combine_docs_chain=stuff_document_chain) 
-    return retrieval_chain.invoke({"input": query})
+    
+    initial_result = retrieval_chain.invoke({"input": query})
+
+    new_result = {
+        "query": initial_result["input"],
+        "result": initial_result["answer"],
+        "source_documents": initial_result["context"],
+    }
+
+    return new_result
 
 if __name__ == "__main__":
     result = run_llm("What is a LangChain chain?")
