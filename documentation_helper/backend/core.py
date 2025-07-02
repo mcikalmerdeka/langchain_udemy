@@ -7,7 +7,7 @@ from langchain_openai import OpenAIEmbeddings
 from langchain import hub
 import os
 
-load_dotenv()
+load_dotenv("../.env")
 
 # Define the index name
 INDEX_NAME = os.environ.get("PINECONE_INDEX_NAME")
