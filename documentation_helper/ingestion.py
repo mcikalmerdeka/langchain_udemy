@@ -2,12 +2,14 @@ import os
 from dotenv import load_dotenv
 from tqdm import tqdm
 
-load_dotenv()
+load_dotenv("../.env")
 
 from langchain.text_splitter import RecursiveCharacterTextSplitter
 from langchain_community.document_loaders import DirectoryLoader, TextLoader
 from langchain_openai import OpenAIEmbeddings
 from langchain_pinecone import PineconeVectorStore
+from langchain_core.documents import Document
+from firecrawl import FirecrawlApp, ScrapeOptions
 
 # Initialize the embeddings model
 embeddings = OpenAIEmbeddings(model="text-embedding-3-small", api_key=os.getenv("OPENAI_API_KEY"))
@@ -62,6 +64,64 @@ def ingest_docs():
 
     print("Data ingested successfully")
 
+# Define a function to ingest the data using Firecrawl
+def ingest_docs_firecrawl() -> None:
+    langchain_documents_base_urls = [
+        "https://python.langchain.com/docs/integrations/chat/",
+        "https://python.langchain.com/docs/integrations/llms/",
+        "https://python.langchain.com/docs/integrations/text_embedding/",
+        "https://python.langchain.com/docs/integrations/document_loaders/",
+        "https://python.langchain.com/docs/integrations/document_transformers/",
+        "https://python.langchain.com/docs/integrations/vectorstores/",
+        "https://python.langchain.com/docs/integrations/retrievers/",
+        "https://python.langchain.com/docs/integrations/tools/",
+        "https://python.langchain.com/docs/integrations/stores/",
+        "https://python.langchain.com/docs/integrations/llm_caching/",
+        "https://python.langchain.com/docs/integrations/graphs/",
+        "https://python.langchain.com/docs/integrations/memory/",
+        "https://python.langchain.com/docs/integrations/callbacks/",
+        "https://python.langchain.com/docs/integrations/chat_loaders/",
+        "https://python.langchain.com/docs/concepts/",
+    ]
+
+    # Just for demo purposes we will only ingest the first URL
+    langchain_documents_base_urls2 = [langchain_documents_base_urls[0]]
+    
+    # Initialize Firecrawl app
+    app = FirecrawlApp(api_key=os.getenv("FIRECRAWL_API_KEY"))
+
+    for url in langchain_documents_base_urls2:
+        print(f"FireCrawling {url=}")
+        
+        # Crawl using official Firecrawl SDK
+        crawl_result = app.crawl_url(
+            url,
+            limit=10,
+            scrape_options=ScrapeOptions(
+                formats=['markdown', 'html'],
+                only_main_content=True
+            )
+        )
+        
+        # Convert Firecrawl results to LangChain Documents
+        docs = []
+        if crawl_result and 'data' in crawl_result:
+            for item in crawl_result['data']:
+                doc = Document(
+                    page_content=item.get('markdown', ''),
+                    metadata=item.get('metadata', {})
+                )
+                docs.append(doc)
+
+        print(f"Going to add {len(docs)} documents to Pinecone")
+        
+        if docs:  # Only add if we have documents
+            PineconeVectorStore.from_documents(
+                docs, embeddings, index_name="firecrawl-langchain-index"
+            )
+            print(f"****Loading {url} to vectorstore done ***")
+        else:
+            print(f"No documents found for {url}")
 
 if __name__ == "__main__":
-    ingest_docs()
+    ingest_docs_firecrawl()
