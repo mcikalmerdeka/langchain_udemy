@@ -17,4 +17,9 @@ class AnswerQuestion(BaseModel):
         description="1-3 search queries for researching improvements to address the critique of your current answer"
     )
 
-
+# Define the revise answer schema output
+class ReviseAnswer(AnswerQuestion): # inherit from the AnswerQuestion schema
+    """Revise your original answer to your question using the new information"""
+    references: List[str] = Field(
+        description="Citations motivating your revised answer"
+    )
