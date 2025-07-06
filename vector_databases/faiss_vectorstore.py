@@ -27,11 +27,11 @@ if __name__ == "__main__":
     # Embed the chunks and store them in a FAISS vector store
     embeddings = OpenAIEmbeddings(model="text-embedding-3-small")
     vectorstore = FAISS.from_documents(documents=docs, embedding=embeddings) # Note that the vectorstore will be stored in the RAM of our local machine
-    vectorstore.save_local("faiss_index_react") # Persist the vectorstore to the local machine (if this is not done, the vectorstore will be lost when the program is closed)
+    vectorstore.save_local("./vector_databases/faiss_index_react") # Persist the vectorstore to the local machine (if this is not done, the vectorstore will be lost when the program is closed)
 
     # Load the vectorstore from the local machine
     new_vectorstore = FAISS.load_local(
-        "faiss_index_react",
+        "./vector_databases/faiss_index_react",
         embeddings,
         allow_dangerous_deserialization=True # This is a security risk, but we are using it here because we are loading the vectorstore from the local machine
     )
