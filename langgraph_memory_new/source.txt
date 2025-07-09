@@ -1,0 +1,7 @@
+Article link
+How To Add Conversational Memory To LLMs Using LangChain
+https://supermemory.ai/blog/how-to-add-conversational-memory-to-llms-using-langchain/
+
+Important thing:
+LangChain recently migrated to LangGraph, a new stateful framework for building multi-step, memory-aware LLM apps. 
+So while the docs might still say “LangChain memory,” what you’re actually using under the hood is LangGraph.
