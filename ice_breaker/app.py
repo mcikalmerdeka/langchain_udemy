@@ -4,7 +4,7 @@ from dotenv import load_dotenv
 load_dotenv()
 
 from flask import Flask, render_template, request, jsonify
-from ice_breaker_app import ice_break_with
+from main_agent import ice_break_with
 
 # Set up the Flask app
 app = Flask(__name__)
