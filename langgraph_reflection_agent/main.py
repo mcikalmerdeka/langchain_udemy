@@ -37,7 +37,7 @@ def reflection_node(state: Sequence[BaseMessage]) -> List[BaseMessage]:
 graph = MessageGraph() 
 graph.add_node(GENERATE, generation_node) # Add the generation node to the graph
 graph.add_node(REFLECT, reflection_node) # Add the reflection node to the graph
-graph.set_entry_point(GENERATE) # Set the entry point to the generation node
+graph.add_edge(START, GENERATE) # Set the entry point to the generation node
 
 # Set up the conditional edges
 graph.add_conditional_edges(GENERATE, should_continue, {

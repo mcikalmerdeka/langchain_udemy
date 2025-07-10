@@ -2,7 +2,7 @@ from dotenv import load_dotenv
 from typing import List
 
 from langchain_core.messages import BaseMessage, ToolMessage
-from langgraph.graph import MessageGraph, END
+from langgraph.graph import MessageGraph, START, END
 
 from chains import first_responder_chain, revise_chain
 from tool_executor import execute_tools
@@ -34,7 +34,7 @@ graph.add_edge(EXECUTE_TOOLS, REVISE)
 graph.add_conditional_edges(REVISE, event_loop)
 
 # Set up entry point
-graph.set_entry_point(FIRST_RESPONDER)
+graph.add_edge(START, FIRST_RESPONDER)
 
 # Compile the graph
 app = graph.compile()
