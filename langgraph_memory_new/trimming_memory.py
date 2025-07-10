@@ -1,6 +1,6 @@
 """
 This file is a example of how to use trim_message method in langchain 
-so that the conversation history from certain k number of messages is summarized and compressed.
+so that the conversation history from certain k number of messages to save token usage.
 """
 
 from langchain_openai import ChatOpenAI
