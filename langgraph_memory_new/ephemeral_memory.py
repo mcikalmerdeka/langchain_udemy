@@ -1,5 +1,5 @@
 """
-This file is a simple example of how to use the MemorySaver to store the state of the chat in memory.
+This file is a simple example of how to use the MemorySaver to store the conversation history in the prompt window.
 """
 
 from langchain_openai import ChatOpenAI
