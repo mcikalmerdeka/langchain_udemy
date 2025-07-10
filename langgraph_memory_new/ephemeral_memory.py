@@ -1,5 +1,6 @@
 """
 This file is a simple example of how to use the MemorySaver to store the conversation history in the prompt window.
+Prompt window just means the context window of the LLM, the best one at the moment (July 2025) are gpt-4.1 and other models that have 1M tokens context window.
 """
 
 from langchain_openai import ChatOpenAI
