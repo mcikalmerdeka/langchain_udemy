@@ -40,4 +40,8 @@ dependencies = [
     "mcp>=1.10.1",
     "langchain-mcp-adapters>=0.1.8",
     "firecrawl-py>=2.14.0",
+    "qrcode>=8.2",
+    "langchain-experimental>=0.3.4",
+    "pandas>=2.3.0",
+    "tabulate>=0.9.0",
 ]
