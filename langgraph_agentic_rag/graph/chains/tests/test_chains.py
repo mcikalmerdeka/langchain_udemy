@@ -2,11 +2,9 @@
 Important thing to remember: To run this go to the root directory and run the command:
 pytest -s -v
 """
-
 from dotenv import load_dotenv
-from langgraph_agentic_rag.graph.chains.retrieval_grader import GradeDocuments, retrieval_grader
-from langgraph_agentic_rag.ingestion import retriever
-
+from graph.chains.retrieval_grader import GradeDocuments, retrieval_grader
+from ingestion import retriever
 load_dotenv()
 
 # Define test for yes answer
