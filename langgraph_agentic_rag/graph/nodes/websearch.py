@@ -18,7 +18,7 @@ except ModuleNotFoundError:
 load_dotenv()
 
 # Initialize the TavilySearch client
-web_search_tool = TavilySearch(max_results=3, api_key=os.getenv("TAVILY_API_KEY"))
+web_search_tool = TavilySearch(max_results=2, api_key=os.getenv("TAVILY_API_KEY"))
 
 # Define the web search node
 def web_search_node(state: GraphState) -> Dict[str, Any]:
@@ -32,6 +32,8 @@ def web_search_node(state: GraphState) -> Dict[str, Any]:
 
     if "documents" in state: # if the route to web search in first time then give error
         documents = state["documents"]
+    else:
+        documents = None
     
     # Invoke the web search tool
     tavily_results = web_search_tool.invoke({"query": question})["results"]
@@ -51,7 +53,7 @@ def web_search_node(state: GraphState) -> Dict[str, Any]:
         documents = [web_results]
 
     # Return the updated state
-    return {"documents": documents, "question": question}
+    return {"documents": documents}
 
 if __name__ == "__main__":
     state = {"question": "agentic memory", "document": None}
