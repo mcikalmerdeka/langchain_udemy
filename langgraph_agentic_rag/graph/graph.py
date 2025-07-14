@@ -4,6 +4,7 @@ from graph.chains.answer_grader import answer_grader
 from graph.chains.hallucination_grader import hallucination_grader
 from graph.consts import RETRIEVE, GRADE_DOCUMENTS, WEB_SEARCH, GENERATE
 from graph.nodes import retrieve_node, grade_documents_node, web_search_node, generate_node
+from graph.chains.router import question_router, RouterQuery
 from graph.state import GraphState
 from langgraph.graph import START, StateGraph, END
 
@@ -56,6 +57,23 @@ def grade_generation_grounded_in_documents_and_question(state: GraphState) -> st
         print("---DECISION: GENERATION IS NOT GROUNDED IN DOCUMENTS, RETRYING---")
         return "Not supported"        
 
+# Define the function to route the question to the most relevant path (web search or vectorstore)
+def route_question(state: GraphState) -> str:
+    """
+    Route the initial question to the most relevant path (web search or vectorstore)
+    """
+    print("---ROUTING QUESTION---")
+    question = state["question"]
+    source: RouterQuery = question_router.invoke({"question": question})
+
+    # Define the condition to check if the question is to be routed to web search or vectorstore
+    if source.datasource == "websearch":
+        print("---DECISION: ROUTING TO WEB SEARCH NODE---")
+        return "websearch"
+    elif source.datasource == "vectorstore":
+        print("---DECISION: ROUTING TO RETRIEVE NODE---")
+        return "vectorstore"
+
 # Define the graph
 graph = StateGraph(GraphState)
 
@@ -66,7 +84,14 @@ graph.add_node(GENERATE, generate_node)
 graph.add_node(WEB_SEARCH, web_search_node)
 
 # Add the edges to the graph
-graph.add_edge(START, RETRIEVE)
+graph.add_edge(START, RETRIEVE) # The original edge from start to retrieve node
+graph.set_conditional_entry_point( # Set the conditional entry point to route the question to the most relevant path
+    path=route_question,
+    path_map={
+        "websearch": WEB_SEARCH, # If the question is to be routed to web search, route to web search node
+        "vectorstore": RETRIEVE # If the question is to be routed to vectorstore, route to retrieve node
+    }
+)
 graph.add_edge(RETRIEVE, GRADE_DOCUMENTS)
 
 ## Conditional edges for grading the documents
