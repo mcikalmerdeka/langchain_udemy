@@ -21,7 +21,7 @@ load_dotenv()
 web_search_tool = TavilySearch(max_results=3, api_key=os.getenv("TAVILY_API_KEY"))
 
 # Define the web search node
-def web_search(state: GraphState) -> Dict[str, Any]:
+def web_search_node(state: GraphState) -> Dict[str, Any]:
     """
     Search the web for the latest information on the given query.
     """
@@ -55,4 +55,4 @@ def web_search(state: GraphState) -> Dict[str, Any]:
 
 if __name__ == "__main__":
     state = {"question": "agentic memory", "document": None}
-    web_search(state)
+    web_search_node(state)

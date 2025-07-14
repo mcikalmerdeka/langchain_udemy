@@ -4,7 +4,7 @@ from graph.state import GraphState
 from ingestion import retriever
 
 # Define the retrieve node
-def retrieve(state: GraphState) -> Dict[str, Any]:
+def retrieve_node(state: GraphState) -> Dict[str, Any]:
     print(f"Retrieving documents for question: {state['question']}")
 
     # Get the question from the state
