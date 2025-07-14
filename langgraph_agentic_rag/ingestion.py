@@ -37,12 +37,12 @@ vectorstore = Chroma.from_documents(
     persist_directory="langgraph_agentic_rag/.chroma_db",
 )
 
-# Turn the vectorstore into a retriever (to perform similarity search)
-retriever = vectorstore.as_retriever()
+# # Turn the vectorstore into a retriever (to perform similarity search)
+# retriever = vectorstore.as_retriever()
 
 # We can also use this approach after we already created the vectorstore (because the vectorstore variable is commented)
-# retriever = Chroma(
-#     collection_name="rag-chroma",
-#     embedding_function=OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key=openai_api_key),
-#     persist_directory="langgraph_agentic_rag/.chroma_db",
-# ).as_retriever()
+retriever = Chroma(
+    collection_name="rag-chroma",
+    embedding_function=OpenAIEmbeddings(model="text-embedding-3-small", openai_api_key=openai_api_key),
+    persist_directory="langgraph_agentic_rag/.chroma_db",
+).as_retriever()
