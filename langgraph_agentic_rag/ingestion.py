@@ -26,7 +26,7 @@ docs = [doc for doc_batch in doc_batches for doc in doc_batch]
 #         docs.append(doc)
 
 # Split the documents into chunks
-text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(chunk_size=250, chunk_overlap=0)
+text_splitter = RecursiveCharacterTextSplitter.from_tiktoken_encoder(chunk_size=500, chunk_overlap=100)
 docs_split = text_splitter.split_documents(docs)
 
 # Store the documents in a vector database (run this once)
