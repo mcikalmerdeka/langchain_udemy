@@ -37,7 +37,6 @@ def grade_documents_node(state: GraphState) -> Dict[str, Any]:
         # Condition to check if the document is relevant
         if grade.lower() == "yes":
             print("---GRADE: DOCUMENT RELEVANT---")
-            print(f"Document {doc.metadata['source']} is relevant to the question")
             filtered_docs.append(doc)
 
         else:
@@ -46,4 +45,4 @@ def grade_documents_node(state: GraphState) -> Dict[str, Any]:
             continue
 
     # Update the state with the filtered documents and the web search flag
-    return {"documents": filtered_docs, "question": question, "web_search": web_search}
+    return {"documents": filtered_docs, "web_search": web_search}

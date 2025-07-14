@@ -13,5 +13,5 @@ def retrieve_node(state: GraphState) -> Dict[str, Any]:
     # Retrieve the relevant documents based on the question
     documents = retriever.invoke(question)
 
-    # Update the field of document in our current state and add the original question (optional)
-    return {"documents": documents, "question": question}
+    # Update the field of document in our current state
+    return {"documents": documents}

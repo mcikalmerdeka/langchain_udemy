@@ -14,6 +14,5 @@ def generate_node(state: GraphState) -> Dict[str, Any]:
     generation = generation_chain.invoke({"question": question, "context": documents})
     return {
         "generation": generation,
-        "documents": documents,
-        "question": question
+        "documents": documents
     }
