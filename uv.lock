@@ -677,7 +677,6 @@ dependencies = [
     { name = "numpy" },
     { name = "packaging" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/e7/9a/e33fc563f007924dd4ec3c5101fe5320298d6c13c158a24a9ed849058569/faiss_cpu-1.11.0.tar.gz", hash = "sha256:44877b896a2b30a61e35ea4970d008e8822545cb340eca4eff223ac7f40a1db9", size = 70218, upload-time = "2025-04-28T07:48:30.459Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/ed/83/8aefc4d07624a868e046cc23ede8a59bebda57f09f72aee2150ef0855a82/faiss_cpu-1.11.0-cp311-cp311-macosx_14_0_arm64.whl", hash = "sha256:a90d1c81d0ecf2157e1d2576c482d734d10760652a5b2fcfa269916611e41f1c", size = 3307997, upload-time = "2025-04-28T07:47:41.905Z" },
     { url = "https://files.pythonhosted.org/packages/2b/64/f97e91d89dc6327e08f619fe387d7d9945bc4be3b0f1ca1e494a41c92ebe/faiss_cpu-1.11.0-cp311-cp311-macosx_14_0_x86_64.whl", hash = "sha256:2c39a388b059fb82cd97fbaa7310c3580ced63bf285be531453bfffbe89ea3dd", size = 7886308, upload-time = "2025-04-28T07:47:44.677Z" },
@@ -1502,7 +1501,7 @@ wheels = [
 
 [[package]]
 name = "langchain-core"
-version = "0.3.65"
+version = "0.3.76"
 source = { registry = "https://pypi.org/simple" }
 dependencies = [
     { name = "jsonpatch" },
@@ -1513,9 +1512,9 @@ dependencies = [
     { name = "tenacity" },
     { name = "typing-extensions" },
 ]
-sdist = { url = "https://files.pythonhosted.org/packages/04/8a/d08c83195d1ef26c42728412ab92ab08211893906b283abce65775e21327/langchain_core-0.3.65.tar.gz", hash = "sha256:54b5e0c8d9bb405415c3211da508ef9cfe0acbe5b490d1b4a15664408ee82d9b", size = 558557, upload-time = "2025-06-10T20:08:28.94Z" }
+sdist = { url = "https://files.pythonhosted.org/packages/4f/4d/5e2ea7754ee0a1f524c412801c6ba9ad49318ecb58b0d524903c3d9efe0a/langchain_core-0.3.76.tar.gz", hash = "sha256:71136a122dd1abae2c289c5809d035cf12b5f2bb682d8a4c1078cd94feae7419", size = 573568, upload-time = "2025-09-10T14:49:39.863Z" }
 wheels = [
-    { url = "https://files.pythonhosted.org/packages/54/f0/31db18b7b8213266aed926ce89b5bdd84ccde7ee2edf4cab14e3dd2bfcf1/langchain_core-0.3.65-py3-none-any.whl", hash = "sha256:80e8faf6e9f331f8ef728f3fe793549f1d3fb244fcf9e1bdcecab6a6f4669394", size = 438052, upload-time = "2025-06-10T20:08:27.393Z" },
+    { url = "https://files.pythonhosted.org/packages/77/b5/501c0ffcb09c734457ceaa86bc7b1dd37b6a261147bd653add03b838aacb/langchain_core-0.3.76-py3-none-any.whl", hash = "sha256:46e0eb48c7ac532432d51f8ca1ece1804c82afe9ae3dcf027b867edadf82b3ec", size = 447508, upload-time = "2025-09-10T14:49:38.179Z" },
 ]
 
 [[package]]
@@ -1538,6 +1537,7 @@ dependencies = [
     { name = "langchain-community" },
     { name = "langchain-experimental" },
     { name = "langchain-mcp-adapters" },
+    { name = "langchain-ollama" },
     { name = "langchain-openai" },
     { name = "langchain-pinecone" },
     { name = "langchain-tavily" },
@@ -1583,6 +1583,7 @@ requires-dist = [
     { name = "langchain-community", specifier = ">=0.3.25" },
     { name = "langchain-experimental", specifier = ">=0.3.4" },
     { name = "langchain-mcp-adapters", specifier = ">=0.1.8" },
+    { name = "langchain-ollama", specifier = ">=0.3.8" },
     { name = "langchain-openai", specifier = ">=0.3.23" },
     { name = "langchain-pinecone", specifier = ">=0.2.8" },
     { name = "langchain-tavily", specifier = ">=0.2.3" },
@@ -1636,6 +1637,19 @@ dependencies = [
 sdist = { url = "https://files.pythonhosted.org/packages/8a/f2/f61eef5dc4b7e2bbb65ea904d59b96bd36c7017265c8e4a99c23688771cd/langchain_mcp_adapters-0.1.8.tar.gz", hash = "sha256:5fc6a596b73be96198135a11707102e3a7e9470b4d149bbbb1c9f9d902e0fa42", size = 20750, upload-time = "2025-06-30T19:28:46.578Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/25/28/86e7abd8ca1ba9057556d1b3c562f61fa068eb59ca7f74aea0dbc1c58115/langchain_mcp_adapters-0.1.8-py3-none-any.whl", hash = "sha256:037323b772f3214986b127fe89d2e7e721ca5e852a618cdbbf00cc955154cc90", size = 13795, upload-time = "2025-06-30T19:28:44.75Z" },
+]
+
+[[package]]
+name = "langchain-ollama"
+version = "0.3.8"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "langchain-core" },
+    { name = "ollama" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/8a/97/1494509e6bdeafca19dc862b0b9551127681c3df4838b986c97b16aacc3f/langchain_ollama-0.3.8.tar.gz", hash = "sha256:ba22537bd4dac4424cb8063bb2930fc31c6704db94728b30b75b4db71ccb214e", size = 32379, upload-time = "2025-09-11T20:03:23.514Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/bc/6b/486bea63bc6a9774780c72fc4a25508197584ef5cb9f983ebc12a24fa827/langchain_ollama-0.3.8-py3-none-any.whl", hash = "sha256:79898316d5663c6b08bc758c82b4e136f826cad2be84b4a26be11f1b0ebf686a", size = 25518, upload-time = "2025-09-11T20:03:22.412Z" },
 ]
 
 [[package]]
@@ -2277,6 +2291,19 @@ source = { registry = "https://pypi.org/simple" }
 sdist = { url = "https://files.pythonhosted.org/packages/69/1b/077b508e3e500e1629d366249c3ccb32f95e50258b231705c09e3c7a4366/olefile-0.47.zip", hash = "sha256:599383381a0bf3dfbd932ca0ca6515acd174ed48870cbf7fee123d698c192c1c", size = 112240, upload-time = "2023-12-01T16:22:53.025Z" }
 wheels = [
     { url = "https://files.pythonhosted.org/packages/17/d3/b64c356a907242d719fc668b71befd73324e47ab46c8ebbbede252c154b2/olefile-0.47-py2.py3-none-any.whl", hash = "sha256:543c7da2a7adadf21214938bb79c83ea12b473a4b6ee4ad4bf854e7715e13d1f", size = 114565, upload-time = "2023-12-01T16:22:51.518Z" },
+]
+
+[[package]]
+name = "ollama"
+version = "0.5.4"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/72/62/a36be4555e4218d6c8b35e72e0dfe0823845400097275cd81c9aec4ddf39/ollama-0.5.4.tar.gz", hash = "sha256:75857505a5d42e5e58114a1b78cc8c24596d8866863359d8a2329946a9b6d6f3", size = 45233, upload-time = "2025-09-16T00:25:25.785Z" }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/1b/af/d0a23c8fdec4c8ddb771191d9b36a57fbce6741835a78f1b18ab6d15ae7d/ollama-0.5.4-py3-none-any.whl", hash = "sha256:6374c9bb4f2a371b3583c09786112ba85b006516745689c172a7e28af4d4d1a2", size = 13548, upload-time = "2025-09-16T00:25:24.186Z" },
 ]
 
 [[package]]

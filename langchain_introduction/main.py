@@ -1,6 +1,7 @@
 from dotenv import load_dotenv
 from langchain_core.prompts import PromptTemplate
 from langchain_openai import ChatOpenAI
+from langchain_ollama import ChatOllama
 
 load_dotenv()
 
@@ -30,8 +31,11 @@ summary_prompt_template = PromptTemplate(
     template=summary_template,
 )
 
-# Initialize the OpenAI model
-llm = ChatOpenAI(model="gpt-4.1-mini", temperature=0)
+# # Initialize the OpenAI model
+# llm = ChatOpenAI(model="gpt-4.1-mini", temperature=0)
+
+# Initialize the Ollama model (using local model)
+llm = ChatOllama(model="qwen3:0.6b", temperature=0)
 
 # Create the chain using LCEL (LangChain Expression Language)
 # this will create a Runnable chain which connect the output of the left component as an input to the right component
