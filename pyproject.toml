@@ -5,9 +5,7 @@ description = "Add your description here"
 readme = "README.md"
 requires-python = ">=3.11"
 dependencies = [
-    "langchain>=0.3.25",
     "langchain-anthropic>=0.3.15",
-    "langchain-openai>=0.3.23",
     "requests>=2.31.0",
     "beautifulsoup4>=4.12.0",
     "python-dotenv>=1.0.0",
@@ -22,7 +20,6 @@ dependencies = [
     "youtube-transcript-api>=1.1.0",
     "pypdf>=5.7.0",
     "faiss-cpu>=1.11.0",
-    "langgraph>=0.5.0",
     "black>=25.1.0",
     "tiktoken>=0.9.0",
     "openai>=1.88.0",
@@ -47,4 +44,7 @@ dependencies = [
     "langchain-chroma>=0.2.4",
     "pytest>=8.4.1",
     "langchain-ollama>=0.3.8",
+    "langgraph>=1.0.0",
+    "langchain>=0.3.25",
+    "langchain-openai>=0.3.23",
 ]
